@@ -15,15 +15,18 @@ export default class Board extends React.Component<BoardProps, {}> {
 
     // TODO: cares about position of square and what question the square has if it has one.
         // Needs to keep track of the location and where each square location is.
-    // TODO: for covered ceil(n/2) where n must be odd for the middle.
 
+    // Identify the covered square during creation and pass it in as a prop to the square!
+    // A covered square doesn't have a question, otherwise it does. :D
+    // If you have a row of covered squares then you have Bingo!!!
     renderSquare() {
         return <Square value={'potato'}/>;
     }
 
     render() {
-
         const size = this.props.value;
+        const initialCoveredSquare = Math.ceil(size/2);
+
         const rows = [];
         for (let i = 0; i < size; i++) {
             rows.push(
