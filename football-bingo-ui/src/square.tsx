@@ -1,19 +1,25 @@
 import React from "react";
 import { Grid } from '@mui/material';
-import PropTypes from 'prop-types';
+import { number} from "prop-types";
 
 interface SquareProps {
-    value: number;
+    value: string;
 }
 
 export default class Square extends React.Component<SquareProps, {}> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            isCovered: false,
+            hasQuestion: true
+        }
+    }
+
     render() {
         return (
-            <React.Fragment>
-                <Grid item xs={4}>
-                    {this.props.value}
-                </Grid>
-          </React.Fragment>
+            <Grid item xs>
+                {this.props.value}
+            </Grid>
         );
     }
 }
