@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid } from '@mui/material';
-import { number} from "prop-types";
 
 interface SquareProps {
     value: string;
@@ -13,8 +12,18 @@ export default class Square extends React.Component<SquareProps, {}> {
     }
 
     // A covered square doesn't have a question, otherwise it does. :D
-
+    // add style to img to make it smaller and alt stating what it is
+    /*
+        {
+                    this.props.isCovered ?
+                        <img src={require('./football.png')}/>
+                    :
+                    this.props.value
+                }
+    */
+    
     render() {
+        
         return (
             <Grid item xs>
                 {this.props.value}

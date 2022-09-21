@@ -1,7 +1,6 @@
 import React from "react";
 import Square from './square';
 import { Grid } from '@mui/material';
-import { ViewColumnSharp } from "@mui/icons-material";
 
 interface BoardProps {
     value: number
@@ -20,9 +19,10 @@ export default class Board extends React.Component<BoardProps, {}> {
     // If you have a row of covered squares then you have Bingo!!!
     renderSquare(colIdx: number, rowIdx: number) {
         const baseSquare = Math.floor(this.props.value/2);
+        const idx = `${colIdx},${rowIdx}`;
         return <Square 
-                    key={`${colIdx},${rowIdx}`} 
-                    value={`${colIdx},${rowIdx}`} 
+                    key={idx} 
+                    value={idx} 
                     isCovered={rowIdx === baseSquare && colIdx === baseSquare}/>;
     }
 
