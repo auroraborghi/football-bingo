@@ -7,13 +7,22 @@ interface BoardProps {
 }
 
 interface BoardState {
-    
+    bingo: boolean
 }
 
 export default class Board extends React.Component<BoardProps, {}> {
-    // TODO: start with 3x3, 5x5, 7x7, etc. (no even numbers can be added - end goal)
+    // TODO - start with 3x3, 5x5, 7x7, etc. (no even numbers can be added - end goal)
     constructor(props: any) {
         super(props);
+
+        this.state = {
+            bingo: false
+        }
+    }
+
+    // TODO - A covered square doesn't have a question, otherwise it does. :D
+    populateQuestions() {
+        // Go through each square and populate a question using the question bank
     }
 
     // If you have a row of covered squares then you have Bingo!!!
@@ -22,7 +31,7 @@ export default class Board extends React.Component<BoardProps, {}> {
         const idx = `${colIdx},${rowIdx}`;
         return <Square 
                     key={idx} 
-                    value={idx} 
+                    value={idx} // TODO - This will be the question to pass in once populated.
                     isCovered={rowIdx === baseSquare && colIdx === baseSquare}/>;
     }
 
