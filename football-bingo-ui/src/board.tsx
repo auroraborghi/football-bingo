@@ -1,28 +1,30 @@
 import React from "react";
 import Square from './square';
 import { Grid } from '@mui/material';
+import * as Questions from './questions';
 
 interface BoardProps {
     value: number
 }
 
 interface BoardState {
-    bingo: boolean
+    bingo: boolean,
+    questions: string[]
 }
 
-export default class Board extends React.Component<BoardProps, {}> {
+export default class Board extends React.Component<BoardProps, BoardState> {
     // TODO - start with 3x3, 5x5, 7x7, etc. (no even numbers can be added - end goal)
     constructor(props: any) {
         super(props);
 
         this.state = {
-            bingo: false
+            bingo: false,
+            questions: Questions.getQuestions(this.props.value)
         }
     }
 
-    // TODO - A covered square doesn't have a question, otherwise it does. :D
-    populateQuestions() {
-        // Go through each square and populate a question using the question bank
+    getQuestion() {
+        
     }
 
     // If you have a row of covered squares then you have Bingo!!!
@@ -39,7 +41,7 @@ export default class Board extends React.Component<BoardProps, {}> {
         const rows = [];
         for (let rowIdx = 0; rowIdx < this.props.value; rowIdx++) {
             rows.push(
-                this.renderSquare(colIdx, rowIdx)
+                this.renderSquare(colIdx, rowIdx,)
             );
         }
         return rows;

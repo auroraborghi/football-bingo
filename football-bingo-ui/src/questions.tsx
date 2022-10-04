@@ -1,36 +1,31 @@
 import React from "react";
 import * as Q from "./question-bank";
 
-interface QuestionsState {
-    questions: string[];
+export const getQuestions = (size: number) => {
+    const commonQuestions = getCommonQuestions(size);
+    const uncommonQuestions = getUncommonQuestions(size);
+    const rareQuestions = getRareQuestions(size);
+    return commonQuestions.concat(uncommonQuestions, rareQuestions);
 }
 
-export default class Questions extends React.Component<{}, QuestionsState> {
+/**
+ * A bingo board should have 60% common questions, 30% uncommon questions, and 10% rare questions.
+ * That is my hypothesis at least.
+ */
+export const getCommonQuestions = (size: number) => {
+    const numberOfQuestions = Math.floor(((size * size) - 1) * 0.6);
+    const shuffledQuestions = Q.COMMON_QUESTIONS.sort(() => 0.5 - Math.random());
+    return shuffledQuestions.slice(0, numberOfQuestions);
+}
 
-    constructor(props: any) {
-        super(props);
+export const getUncommonQuestions = (size: number) => {
+    const numberOfQuestions = Math.floor(((size * size) - 1)  * 0.3);
+    const shuffledQuestions = Q.UNCOMMON_QUESTIONS.sort(() => 0.5 - Math.random());
+    return shuffledQuestions.slice(0, numberOfQuestions);
+}
 
-        this.state = {
-            questions: []
-        }
-    }
-
-    /**
-     * A bingo board should have 60% common questions, 30% uncommon questions, and 10% rare questions.
-     * That is my hypothesis at least.
-     */
-
-    getCommonQuestions() {
-        // return randomized list of common questions based on the percentage of the size of the bingo board
-        let commonQuestions = Q.COMMON_QUESTIONS;
-    }
-
-    getUncommonQuestions() {
-        // return randomized list of uncommon questions based on the percentage of the size of the bingo board
-    }
-
-    getRareQuestions() {
-        // return randomized list of rare questions based on the percentage of the size of the bingo board
-
-    }
+export const getRareQuestions = (size: number) => {
+    const numberOfQuestions = Math.ceil(((size * size) - 1)  * 0.1);
+    const shuffledQuestions = Q.RARE_QUESTIONS.sort(() => 0.5 - Math.random());
+    return shuffledQuestions.slice(0, numberOfQuestions);
 }
