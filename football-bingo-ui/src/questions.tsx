@@ -5,7 +5,9 @@ export const getQuestions = (size: number) => {
     const commonQuestions = getCommonQuestions(size);
     const uncommonQuestions = getUncommonQuestions(size);
     const rareQuestions = getRareQuestions(size);
-    return commonQuestions.concat(uncommonQuestions, rareQuestions);
+    const questions = commonQuestions.concat(uncommonQuestions, rareQuestions);
+    const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
+    return shuffledQuestions.slice(0, (size * size));
 }
 
 /**
@@ -13,19 +15,19 @@ export const getQuestions = (size: number) => {
  * That is my hypothesis at least.
  */
 export const getCommonQuestions = (size: number) => {
-    const numberOfQuestions = Math.floor(((size * size) - 1) * 0.6);
+    const numberOfQuestions = Math.floor((size * size) * 0.6);
     const shuffledQuestions = Q.COMMON_QUESTIONS.sort(() => 0.5 - Math.random());
     return shuffledQuestions.slice(0, numberOfQuestions);
 }
 
 export const getUncommonQuestions = (size: number) => {
-    const numberOfQuestions = Math.floor(((size * size) - 1)  * 0.3);
+    const numberOfQuestions = Math.floor((size * size)  * 0.3);
     const shuffledQuestions = Q.UNCOMMON_QUESTIONS.sort(() => 0.5 - Math.random());
     return shuffledQuestions.slice(0, numberOfQuestions);
 }
 
 export const getRareQuestions = (size: number) => {
-    const numberOfQuestions = Math.ceil(((size * size) - 1)  * 0.1);
+    const numberOfQuestions = Math.ceil((size * size) * 0.1);
     const shuffledQuestions = Q.RARE_QUESTIONS.sort(() => 0.5 - Math.random());
     return shuffledQuestions.slice(0, numberOfQuestions);
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Square from './square';
 import { Grid } from '@mui/material';
 import * as Questions from './questions';
@@ -23,32 +23,33 @@ export default class Board extends React.Component<BoardProps, BoardState> {
         }
     }
 
-    getQuestion() {
-        
-    }
-
     // If you have a row of covered squares then you have Bingo!!!
     renderSquare(colIdx: number, rowIdx: number) {
+        const {questions} = this.state;
         const baseSquare = Math.floor(this.props.value/2);
         const idx = `${colIdx},${rowIdx}`;
-        return <Square 
-                    key={idx} 
-                    value={idx} // TODO - This will be the question to pass in once populated.
+        
+        const question = questions.shift() ?? '';
+        questions.push(question);
+
+        return <Square
+                    key={idx}
+                    value={question}
                     isCovered={rowIdx === baseSquare && colIdx === baseSquare}/>;
     }
 
     renderRows(colIdx: number) {
-        const rows = [];
+        const rows: any[] = [];
         for (let rowIdx = 0; rowIdx < this.props.value; rowIdx++) {
             rows.push(
-                this.renderSquare(colIdx, rowIdx,)
+                this.renderSquare(colIdx, rowIdx)
             );
         }
         return rows;
     }
 
     renderBoard() {
-        const cols = [];
+        const cols: any[] = [];
         for (let colIdx = 0; colIdx < this.props.value; colIdx++) {
             cols.push(
                 <Grid container item>
