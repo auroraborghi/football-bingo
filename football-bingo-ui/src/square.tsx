@@ -1,9 +1,11 @@
 import React from "react";
-import { Grid } from '@mui/material';
+import { Grid, Button } from '@mui/material';
+import './styles/square.css';
 
 interface SquareProps {
     value: string;
     isCovered: boolean;
+    size: number;
 }
 
 export default class Square extends React.Component<SquareProps, {}> {
@@ -16,13 +18,18 @@ export default class Square extends React.Component<SquareProps, {}> {
 
     render() {
         return (
-            <Grid item xs>
-                {
-                    this.props.isCovered ?
-                        <img src={require('./football.png')}/>
-                    :
-                    this.props.value
-                }
+            <Grid item xs zeroMinWidth
+                justifyContent="center"
+                direction='row'
+                alignItems="stretch">
+                <Button className={'ButtonStyling'}>
+                    {
+                        this.props.isCovered ?
+                            <img src={require('./football.png')}/>
+                        :
+                        this.props.value
+                    }
+                </Button>
             </Grid>
         );
     }

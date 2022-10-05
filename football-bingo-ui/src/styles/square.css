@@ -1,4 +1,9 @@
 img {
-    height: 1.5em;
-    width: 1.5em;
+    height: 3em;
+    width: 3em;
+}
+
+.ButtonStyling {
+    height: 100%;
+    width: 100%;
 }

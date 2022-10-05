@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import Square from './square';
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import * as Questions from './questions';
+import './styles/square.css';
 
 interface BoardProps {
     value: number
@@ -35,6 +36,7 @@ export default class Board extends React.Component<BoardProps, BoardState> {
         return <Square
                     key={idx}
                     value={question}
+                    size={this.props.value}
                     isCovered={rowIdx === baseSquare && colIdx === baseSquare}/>;
     }
 
@@ -52,7 +54,10 @@ export default class Board extends React.Component<BoardProps, BoardState> {
         const cols: any[] = [];
         for (let colIdx = 0; colIdx < this.props.value; colIdx++) {
             cols.push(
-                <Grid container item>
+                <Grid container item
+                direction='row'
+                    justifyContent="center"
+                    alignItems="stretch">
                     <React.Fragment>
                         {this.renderRows(colIdx)}
                     </React.Fragment>
@@ -64,11 +69,15 @@ export default class Board extends React.Component<BoardProps, BoardState> {
 
     render() {
         return (
-            <div>
-                <div className="board">
+            <Box>
+                <Grid 
+                container
+                direction='row'
+                justifyContent="center"
+                alignItems="stretch">
                     {this.renderBoard()}
-                </div>
-            </div>
+                </Grid>
+            </Box>
         );
     }
 }
