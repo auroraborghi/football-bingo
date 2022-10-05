@@ -36,7 +36,6 @@ export default class Board extends React.Component<BoardProps, BoardState> {
         return <Square
                     key={idx}
                     value={question}
-                    size={this.props.value}
                     isCovered={rowIdx === baseSquare && colIdx === baseSquare}/>;
     }
 

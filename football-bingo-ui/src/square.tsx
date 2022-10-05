@@ -5,26 +5,45 @@ import './styles/square.css';
 interface SquareProps {
     value: string;
     isCovered: boolean;
-    size: number;
 }
 
-export default class Square extends React.Component<SquareProps, {}> {
+interface SquareState {
+    isCoveredQuestion: boolean;
+}
+
+export default class Square extends React.Component<SquareProps, SquareState> {
     constructor(props: any) {
         super(props);
+
+        this.state = {
+            isCoveredQuestion: false
+        }
     }
 
-    // TODO: Will need to be able to click on the squares - isCovered can count towards bingo vibes.
+    _onClick = () => {
+        this.setState({
+            isCoveredQuestion: !this.state.isCoveredQuestion
+        });
+    }
+
     // TODO: Will need to keep track of what squares have been clicked on the board.
 
     render() {
+        const {isCoveredQuestion} = this.state
+
+        // TODO Could make middle button a disabled button...
+
         return (
             <Grid item xs zeroMinWidth
                 justifyContent="center"
                 direction='row'
                 alignItems="stretch">
-                <Button className={'ButtonStyling'}>
+                <Button 
+                    className={'ButtonStyling'}
+                    onClick={this._onClick}>
                     {
-                        this.props.isCovered ?
+                        (this.props.isCovered || isCoveredQuestion) 
+                        ?
                             <img src={require('./football.png')}/>
                         :
                         this.props.value
